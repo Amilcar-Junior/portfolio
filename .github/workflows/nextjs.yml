@@ -3,32 +3,26 @@
 name: Deploy Next.js site to Pages
 
 on:
-  # Aciona o workflow em pushes para o branch principal
   push:
     branches: ["main"]
-
-  # Permite executar manualmente o workflow a partir da guia de Ações
   workflow_dispatch:
 
-# Permissões para o GITHUB_TOKEN para permitir implantação no GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Permitir apenas uma implantação concorrente, ignorando execuções em fila entre a execução em andamento e as últimas em fila
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Job de build
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -36,12 +30,10 @@ jobs:
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
           elif [ -f "${{ github.workspace }}/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
           else
             echo "Unable to determine package manager"
             exit 1
@@ -52,7 +44,7 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-        
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -63,9 +55,9 @@ jobs:
         with:
           path: |
             .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock', 'next.config.mjs') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock', 'next.config.mjs') }}-
 
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
@@ -73,15 +65,11 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
-      - name: Export static site
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out  # Após 'next export', os arquivos estáticos estarão no diretório 'out'
+          path: ./out
 
-  # Job de Deploy
   deploy:
     environment:
       name: github-pages
