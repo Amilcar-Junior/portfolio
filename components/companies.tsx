@@ -6,28 +6,29 @@ import { TRANSLATIONS } from "@/lib/constants";
 import { SectionWrapper } from "./section-wrapper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-import Image from 'next/image';
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 
 const companies = [
   {
     name: "Company 1",
-    logo: "/img/company/artistacv.png?height=100&width=100",
+    logo: "./img/company/artistacv.png?height=100&width=100",
   },
   {
     name: "Company 2",
-    logo: "/img/company/devnology.png?height=100&width=100",
+    logo: "./img/company/devnology.png?height=100&width=100",
   },
   {
     name: "Company 3",
-    logo: "/img/company/health360.png?height=100&width=100",
+    logo: "./img/company/health360.png?height=100&width=100",
   },
   {
     name: "Company 4",
-    logo: "/img/company/ministeriocultura.png?height=100&width=100",
+    logo: "./img/company/ministeriocultura.png?height=100&width=100",
   },
-  { name: "Company 5", logo: "/img/company/unesco.png?height=100&width=100" },
+  { name: "Company 5", 
+    logo: "./img/company/unesco.png?height=100&width=100" },
 ];
 
 export function Companies() {

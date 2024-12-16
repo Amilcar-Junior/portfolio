@@ -22,7 +22,7 @@ const projects = [
       en: "The art of Cape Verde in one place.",
       pt: "A arte de Cabo Verde em um só lugar.",
     },
-    image: "/img/project/projectartista.png",
+    image: "./img/project/projectartista.png",
     link: "https://www.artista.cv",
   },
   {
@@ -34,7 +34,7 @@ const projects = [
       en: "Sandwatch is a program that mobilizes communities to protect their beaches.",
       pt: "O Sandwatch é um programa que mobiliza comunidades para proteger suas praias.",
     },
-    image: "/img/project/sandwatchcv.png",
+    image: "./img/project/sandwatchcv.png",
     link: "https://sandwatch.cv/sobre-nos",
   },
   {
@@ -46,7 +46,7 @@ const projects = [
       en: "A complete healthcare solution.",
       pt: "Uma solução completa da área de saúde.",
     },
-    image: "/img/project/health.png",
+    image: "./img/project/health.png",
     link: "https://www.health.cv",
   },
 ];
