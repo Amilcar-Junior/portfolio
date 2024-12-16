@@ -130,36 +130,37 @@ export function Projects() {
         onMouseLeave={() => setHoveredIndex(null)}
       >
         <CardContent className="p-0">
-          <Image
-            src={project.image}
-            alt={project.title[language]}
-            width={500}
-            height={300}
-            className="w-full aspect-square object-cover"
-          />
+          <div className="aspect-square relative">
+            <Image
+              src={project.image}
+              alt={project.title[language]}
+              fill
+              className="object-cover"
+            />
+          </div>
           {hoveredIndex === index && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className={`absolute inset-0 ${
                 isDark ? "bg-black/80" : "bg-white/80"
-              } p-6 flex flex-col justify-between ${
+              } p-4 flex flex-col justify-between ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
               <div>
-                <h3 className="text-xl font-bold mb-2">
+                <h3 className="text-lg font-bold mb-1">
                   {project.title[language]}
                 </h3>
-                <p className="text-sm mb-4">{project.description[language]}</p>
+                <p className="text-xs mb-2">{project.description[language]}</p>
               </div>
               <div>
-                <h4 className="text-sm font-semibold mb-2">Technologies:</h4>
-                <div className="flex flex-wrap gap-2">
+                <h4 className="text-xs font-semibold mb-1">Technologies:</h4>
+                <div className="flex flex-wrap gap-1">
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className={`text-xs px-2 py-1 rounded-full ${
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                         isDark
                           ? "bg-gray-700 text-white"
                           : "bg-gray-200 text-gray-800"
@@ -179,7 +180,7 @@ export function Projects() {
 
   return (
     <section
-      className={`h-screen ${
+      className={`min-h-screen ${
         isDark ? "bg-black" : "bg-white"
       } py-24 flex flex-col justify-center`}
       id="projects"
@@ -209,7 +210,7 @@ export function Projects() {
               ))}
             </Swiper>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {projects.map((project, index) => (
                 <ProjectCard key={index} project={project} index={index} />
               ))}
