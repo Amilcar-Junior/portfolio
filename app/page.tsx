@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Hero } from '@/components/hero'
 import { Technologies } from '@/components/technologies'
@@ -11,10 +10,6 @@ import { Footer } from '@/components/footer'
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
 
   const [isMobile, setIsMobile] = useState(false)
 

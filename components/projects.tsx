@@ -8,7 +8,7 @@ import { TRANSLATIONS } from '@/lib/constants'
 import { SectionWrapper } from './section-wrapper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-
+import Image from 'next/image';
 import 'swiper/css'
 import 'swiper/css/pagination'
 
@@ -76,9 +76,11 @@ export function Projects() {
         onMouseLeave={() => setHoveredIndex(null)}
       >
         <CardContent className="p-0">
-          <img
+          <Image 
             src={project.image}
             alt={project.title[language]}
+            width={500} // Substitua pelo tamanho adequado
+  height={300} // Substitua pelo tamanho adequado
             className="w-full aspect-square object-cover"
           />
           {hoveredIndex === index && (

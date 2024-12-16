@@ -21,8 +21,8 @@ export function Navbar() {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
       <nav className="container flex items-center justify-between h-16">
-        <button onClick={() => scrollToSection('#home')} className="font-semibold text-xl">
-        Amílcar Júnior
+        <button onClick={() => scrollToSection('#home')} className="font-semibold text-xl ">
+          Amilcar Júnior
         </button>
         
         {/* Desktop menu */}
