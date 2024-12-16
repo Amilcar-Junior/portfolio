@@ -31,7 +31,7 @@ export function Hero() {
       ${isDark 
         ? 'bg-gradient-to-b from-[#4C1D95] to-black'
         : 'bg-gradient-to-b from-[#4C1D95] to-white'
-      }`}
+      }`} id='hero'
     >
       <SectionWrapper>
         <div className="container max-w-4xl mx-auto px-4 text-center">

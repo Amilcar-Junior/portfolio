@@ -15,7 +15,7 @@ export function Footer() {
   const { language, isDark } = useSettings()
 
   return (
-    <footer className={`h-screen ${isDark 
+    <footer id='contact' className={`h-screen ${isDark 
   ? 'from-black to-[#4C1D95] bg-gradient-to-b'
   : 'from-white to-[#4C1D95] bg-gradient-to-b'
 } text-white flex flex-col justify-center`}>

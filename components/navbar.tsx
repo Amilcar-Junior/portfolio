@@ -1,94 +1,106 @@
-"use client";
+'use client'
 
-import { useState, useCallback } from "react";
-import { Moon, Sun, Menu, X, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useSettings } from "@/contexts/settings-context";
-import { NAV_ITEMS } from "@/lib/constants";
+import { useState, useCallback } from 'react'
+import { Moon, Sun, Menu, X, Download } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useSettings } from '@/contexts/settings-context'
+import { NAV_ITEMS } from '@/lib/constants'
+import type { NavItem } from '@/lib/types'
+import Image from 'next/image'
 
 export function Navbar() {
-  const { language, setLanguage, isDark, toggleTheme } = useSettings();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage, isDark, toggleTheme } = useSettings()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const scrollToSection = useCallback((sectionId: string) => {
-    const section = document.querySelector(sectionId);
+    const section = document.querySelector(sectionId)
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
+      section.scrollIntoView({ behavior: 'smooth' })
+      setIsMenuOpen(false)
     }
-  }, []);
+  }, [])
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
-      <nav className="container flex items-center justify-between h-16">
-        <div className="md:flex items-center space-x-4">
-          <button
-            onClick={() => scrollToSection("#home")}
-            className="font-semibold text-xl "
-          >
-            Amilcar Júnior
-          </button>
-        </div>
+    <header className="fixed top-0 w-full z-50 bg-white dark:bg-black backdrop-blur-sm">
+      <nav className="container mx-auto px-6 flex items-center justify-between h-16">
+        <button 
+          onClick={() => {
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+              heroSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            setIsMenuOpen(false);
+          }} 
+          className="flex items-center pl-4"
+        >
+          <Image
+            src={isDark ? './img/logo_wite.png' : './img/logo_black.png'}
+            alt="Amilcar Júnior Logo"
+            width={100}
+            height={100}
+            className="mr-2"
+          />
+        </button>
+        
         {/* Desktop menu */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center justify-center flex-1 gap-8">
           {NAV_ITEMS[language].map((item) => (
             <button
               key={item.href}
               onClick={() => scrollToSection(item.href)}
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors mx-2"
             >
               {item.label}
             </button>
           ))}
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => window.open("/docs/curriculo.pdf", "_blank")}
-            title={language === "en" ? "Download CV" : "Baixar Currículo"}
+            onClick={() => window.open('./docs/curriculo.pdf', '_blank')}
+            title={language === 'en' ? 'Download CV' : 'Baixar Currículo'}
+            className="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
           >
             <Download className="h-5 w-5" />
           </Button>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setLanguage(language === "en" ? "pt" : "en")}
+            onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
+            className="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
           >
             {language.toUpperCase()}
           </Button>
-          <Button variant="ghost" size="icon" onClick={toggleTheme}>
-            {isDark ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={toggleTheme}
+            className="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
+          >
+            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </nav>
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-sm">
+        <div className="md:hidden bg-white dark:bg-gray-900 backdrop-blur-sm">
           <div className="container py-4">
             {NAV_ITEMS[language].map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors w-full text-left"
+                className="block py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors w-full text-left"
               >
                 {item.label}
               </button>
@@ -97,5 +109,6 @@ export function Navbar() {
         </div>
       )}
     </header>
-  );
+  )
 }
+

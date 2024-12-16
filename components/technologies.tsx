@@ -13,7 +13,7 @@ export function Technologies() {
 
   useEffect(() => {
     const handleResize = () => {
-      const container = document.getElementById('skills-container');
+      const container = document.getElementById('skills');
       if (container) {
         setContainerSize({
           width: container.offsetWidth,
@@ -34,7 +34,7 @@ export function Technologies() {
   return (
     <section 
       className={`h-screen relative overflow-hidden ${isDark ? 'bg-black' : 'bg-white'}`} 
-      id="skills-container"
+      id="skills"
     >
       <div className={`absolute inset-0 bg-gradient-radial ${isDark ? 'from-purple-900/20 to-transparent' : 'from-purple-200/30 to-transparent'} opacity-30`} />
       
