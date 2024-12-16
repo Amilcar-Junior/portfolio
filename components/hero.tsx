@@ -4,6 +4,7 @@ import { TypeAnimation } from 'react-type-animation'
 import { useSettings } from '@/contexts/settings-context'
 import { TRANSLATIONS } from '@/lib/constants'
 import { SectionWrapper } from './section-wrapper'
+import { useEffect, useState } from 'react'
 
 const waveAnimation = `
   @keyframes wave {
@@ -20,18 +21,24 @@ const waveAnimation = `
 
 export function Hero() {
   const { language, isDark } = useSettings()
+  const [key, setKey] = useState(0)
   
+  useEffect(() => {
+    // Force re-render of TypeAnimation when language changes
+    setKey(prevKey => prevKey + 1)
+  }, [language])
+
   const typingSequence = TRANSLATIONS[language].typing.flatMap(text => [
     text,
     2000
   ])
 
   return (
-    <section className={`flex flex-col items-center justify-center h-screen
+    <section id="hero" className={`flex flex-col items-center justify-center h-screen
       ${isDark 
         ? 'bg-gradient-to-b from-[#4C1D95] to-black'
         : 'bg-gradient-to-b from-[#4C1D95] to-white'
-      }`} id='hero'
+      }`}
     >
       <SectionWrapper>
         <div className="container max-w-4xl mx-auto px-4 text-center">
@@ -56,6 +63,7 @@ export function Hero() {
           
           <div className="h-[1.5em] text-xl md:text-2xl lg:text-3xl font-medium text-white">
             <TypeAnimation
+              key={key}
               sequence={typingSequence}
               wrapper="p"
               speed={50}
