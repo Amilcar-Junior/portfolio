@@ -72,9 +72,13 @@ export function Projects() {
     project: (typeof projects)[0];
     index: number;
   }) => (
-    <motion.div
+    <motion.a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
+      className="block"
     >
       <Card
         className={`relative overflow-hidden cursor-pointer ${
@@ -109,7 +113,7 @@ export function Projects() {
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </motion.a>
   );
 
   return (
