@@ -62,8 +62,8 @@ export function Companies() {
       <Image
         src={company.logo}
         alt={company.name}
-        width={500} // Substitua pelo tamanho adequado
-        height={300} // Substitua pelo tamanho adequado
+        width={500}
+        height={300}
         className={`w-full h-full object-contain transition-all duration-300 ease-in-out
           ${
             hoveredIndex === index
