@@ -22,6 +22,7 @@ const projects = [
       en: "The art of Cape Verde in one place.",
       pt: "A arte de Cabo Verde em um só lugar.",
     },
+    technologies: ["Next.js", "MongoDB"],
     image: "./img/project/projectartista.png",
     link: "https://www.artista.cv",
   },
@@ -34,6 +35,7 @@ const projects = [
       en: "Sandwatch is a program that mobilizes communities to protect their beaches.",
       pt: "O Sandwatch é um programa que mobiliza comunidades para proteger suas praias.",
     },
+    technologies: ["React", "MySQL"],
     image: "./img/project/sandwatchcv.png",
     link: "https://sandwatch.cv/sobre-nos",
   },
@@ -46,8 +48,48 @@ const projects = [
       en: "A complete healthcare solution.",
       pt: "Uma solução completa da área de saúde.",
     },
+    technologies: ["Python", "PostgreSQL", "XML", "Odoo"],
     image: "./img/project/health.png",
     link: "https://www.health.cv",
+  },
+  {
+    title: {
+      en: "RS2Lab System",
+      pt: "RS2Lab System",
+    },
+    description: {
+      en: "Sensor monitoring and actuator control system for agricultural areas.",
+      pt: "Sistema de monitoramento de Sensores e Controlo de Atuadores para area agricula.",
+    },
+    technologies: ["Vue.js", "MQTT", "Node-Red", "MySQL"],
+    image: "./img/project/rs2lab.png",
+    link: "https://github.com/Amilcar-Junior/RS2LAB_UNICV",
+  },
+  {
+    title: {
+      en: "Web Scraper Open Food Facts",
+      pt: "Web Scraper Open Food Facts",
+    },
+    description: {
+      en: "API that extracts data from Open Food Facts, filtering products by Nutri-Score (A to E) and NOVA (degree of processing).",
+      pt: "API que extrai dados do Open Food Facts, filtrando produtos por Nutri-Score (A a E) e NOVA (grau de processamento).",
+    },
+    technologies: ["JavaScript", "Node.js", "Puppeteer", "Swagger"],
+    image: "./img/project/openfood.png",
+    link: "https://github.com/Amilcar-Junior/puppeteer-open-food-facts",
+  },
+  {
+    title: {
+      en: "Laptops Web Scraper Api",
+      pt: "Notebook Web Scraper Api",
+    },
+    description: {
+      en: "This project is an API to collect and provide information about desktop products from a web scraping test page.",
+      pt: "Este projeto é uma API para coletar e fornecer informações sobre produtos de desktops de uma página de testes de web scraping.",
+    },
+    technologies: ["JavaScript", "Node.js", "Puppeteer", "Swagger"],
+    image: "./img/project/laptops.png",
+    link: "https://github.com/Amilcar-Junior/web-scraper-laptops",
   },
 ];
 
@@ -101,14 +143,33 @@ export function Projects() {
               animate={{ opacity: 1, y: 0 }}
               className={`absolute inset-0 ${
                 isDark ? "bg-black/80" : "bg-white/80"
-              } p-6 flex flex-col justify-center items-center ${
+              } p-6 flex flex-col justify-between ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              <h3 className="text-xl font-bold mb-2">
-                {project.title[language]}
-              </h3>
-              <p className="text-center">{project.description[language]}</p>
+              <div>
+                <h3 className="text-xl font-bold mb-2">
+                  {project.title[language]}
+                </h3>
+                <p className="text-sm mb-4">{project.description[language]}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold mb-2">Technologies:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className={`text-xs px-2 py-1 rounded-full ${
+                        isDark
+                          ? "bg-gray-700 text-white"
+                          : "bg-gray-200 text-gray-800"
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           )}
         </CardContent>
@@ -159,3 +220,4 @@ export function Projects() {
     </section>
   );
 }
+
