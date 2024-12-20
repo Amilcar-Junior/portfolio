@@ -7,10 +7,11 @@ import { useSettings } from "@/contexts/settings-context";
 import { TRANSLATIONS } from "@/lib/constants";
 import { SectionWrapper } from "./section-wrapper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const projects = [
   {
@@ -120,17 +121,17 @@ export function Projects() {
       rel="noopener noreferrer"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="block"
+      className="block w-full h-full"
     >
       <Card
         className={`relative overflow-hidden cursor-pointer ${
           isDark ? "bg-gray-800" : "bg-white"
-        }`}
+        } h-full`}
         onMouseEnter={() => setHoveredIndex(index)}
         onMouseLeave={() => setHoveredIndex(null)}
       >
-        <CardContent className="p-0">
-          <div className="aspect-square relative">
+        <CardContent className="p-0 h-full">
+          <div className="aspect-square relative h-full">
             <Image
               src={project.image}
               alt={project.title[language]}
@@ -195,27 +196,33 @@ export function Projects() {
             {TRANSLATIONS[language].projects}
           </h2>
 
-          {isMobile ? (
+          <div className="relative">
             <Swiper
-              modules={[Pagination]}
+              modules={[Pagination, Navigation]}
               spaceBetween={30}
-              slidesPerView={1}
+              slidesPerView={isMobile ? 1 : 3}
               pagination={{ clickable: true }}
+              navigation={{
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next',
+              }}
               className="w-full"
+              style={{
+                '--swiper-navigation-color': '#4C1D95',
+                '--swiper-pagination-color': '#4C1D95',
+              } as React.CSSProperties}
             >
               {projects.map((project, index) => (
-                <SwiperSlide key={index}>
-                  <ProjectCard project={project} index={index} />
+                <SwiperSlide key={index} className="h-full">
+                  <div className="aspect-square">
+                    <ProjectCard project={project} index={index} />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {projects.map((project, index) => (
-                <ProjectCard key={index} project={project} index={index} />
-              ))}
-            </div>
-          )}
+            <div className="swiper-button-prev !text-[#4C1D95]"></div>
+            <div className="swiper-button-next !text-[#4C1D95]"></div>
+          </div>
         </div>
       </SectionWrapper>
     </section>
