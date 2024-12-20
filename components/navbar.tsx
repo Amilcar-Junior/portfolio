@@ -5,6 +5,7 @@ import { Moon, Sun, Menu, X, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useSettings } from '@/contexts/settings-context'
 import { NAV_ITEMS } from '@/lib/constants'
+import type { NavItem } from '@/lib/types'
 import Image from 'next/image'
 
 export function Navbar() {
@@ -57,12 +58,15 @@ export function Navbar() {
         <div className="flex items-center space-x-2">
           <Button
             variant="ghost"
-            size="icon"
+            size="sm"
             onClick={() => window.open('./docs/curriculo.pdf', '_blank')}
             title={language === 'en' ? 'Download CV' : 'Baixar Currículo'}
-            className="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
+            className="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 flex items-center gap-2"
           >
             <Download className="h-5 w-5" />
+            <span className="hidden sm:inline">
+              {language === 'en' ? 'CV' : 'CV'}
+            </span>
           </Button>
           <Button
             variant="ghost"
