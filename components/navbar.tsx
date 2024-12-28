@@ -5,7 +5,6 @@ import { Moon, Sun, Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSettings } from "@/contexts/settings-context";
 import { NAV_ITEMS } from "@/lib/constants";
-import type { NavItem } from "@/lib/types";
 import Image from "next/image";
 
 export function Navbar() {
