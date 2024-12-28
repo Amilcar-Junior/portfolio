@@ -6,30 +6,30 @@ import { TRANSLATIONS } from '@/lib/constants'
 import { SectionWrapper } from './section-wrapper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-
+import Image from "next/image";
 import 'swiper/css'
 import 'swiper/css/pagination'
 
 const companies = [
   {
     name: "Artista CV",
-    logo: "./img/company/artistacv.png?height=100&width=100",
+    logo: "./img/company/artistacv.png",
   },
   {
     name: "Devnology",
-    logo: "./img/company/devnology.png?height=100&width=100",
+    logo: "./img/company/devnology.png",
   },
   {
     name: "Health 360",
-    logo: "./img/company/health360.png?height=100&width=100",
+    logo: "./img/company/health360.png",
   },
   {
     name: "Ministério da Cultura e das Indústrias Criativas",
-    logo: "./img/company/ministeriocultura.png?height=100&width=100",
+    logo: "./img/company/ministeriocultura.png",
   },
   { 
     name: "UNESCO", 
-    logo: "./img/company/unesco.png?height=100&width=100" 
+    logo: "./img/company/unesco.png" 
   },
 ];
 
@@ -54,12 +54,20 @@ export function Companies() {
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
-      <img
+       <Image
+        src={company.logo}
+        alt={company.name}
+        width={100}
+        height={100}
+        className={`w-full h-full object-contain transition-all duration-300 ease-in-out
+          ${hoveredIndex === index ? '' : isDark ? 'invert brightness-0 opacity-70' : 'brightness-0 opacity-70'}`}
+      />
+      {/* <img
         src={company.logo}
         alt={company.name}
         className={`w-full h-full object-contain transition-all duration-300 ease-in-out
           ${hoveredIndex === index ? '' : isDark ? 'invert brightness-0 opacity-70' : 'brightness-0 opacity-70'}`}
-      />
+      /> */}
     </div>
   )
 
